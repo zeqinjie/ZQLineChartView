@@ -1,9 +1,9 @@
 //
 //  NSMutableAttributedString+StringContentColor.h
-//  HKHouse591
+//  ZQLineChartView
 //
-//  Created by addcn on 16/8/31.
-//  Copyright © 2016年 guojian. All rights reserved.
+//  Created by zhengzqin on 16/8/31.
+//  Copyright © 2016年 zhengzqin. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

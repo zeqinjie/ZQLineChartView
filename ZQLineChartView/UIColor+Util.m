@@ -1,9 +1,9 @@
 //
 //  UIColor+Util.m
-//  BirdCar
+//  ZQLineChartView
 //
-//  Created by Yigol Chan on 15/6/1.
-//  Copyright (c) 2015年 Injoinow. All rights reserved.
+//  Created by zhengzqin on 15/6/1.
+//  Copyright (c) 2015年 zhengzqin. All rights reserved.
 //
 
 #import "UIColor+Util.h"

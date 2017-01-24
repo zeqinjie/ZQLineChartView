@@ -3,7 +3,7 @@
 //  ZQLineChartView
 //
 //  Created by zhengzeqin on 2017/1/24.
-//  Copyright © 2017年 addcn. All rights reserved.
+//  Copyright © 2017年 zhengzeqin. All rights reserved.
 //
 
 #import "ViewController.h"
@@ -41,7 +41,7 @@
     
     ZQLineChartView *ZQLine = [[ZQLineChartView alloc]initWithFrame:CGRectMake(0, 100, self.view.frame.size.width , 200)];
     [ZQLine reloadData:xArray yValueArrays:yArray yMax:280 yMin:100 animation:YES];
-    ZQLine.titleArr = @[@"本建案",@"北投区",@"台北市"];
+    ZQLine.titleArr = @[@"本产品",@"罗湖区",@"深圳市"];
     ZQLine.isOpenPressGes = YES;
     //    ZQLine.isShowHorLine = YES;
     ZQLine.isShowVerLine = YES;

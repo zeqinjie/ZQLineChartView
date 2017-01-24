@@ -1,10 +1,6 @@
 # ZQLineChartView
 
 
-
-# PhotoShoot
-
-
 # How To Use
 
 ```ruby
