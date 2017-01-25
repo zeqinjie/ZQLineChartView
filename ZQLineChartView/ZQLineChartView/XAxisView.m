@@ -320,38 +320,12 @@
         
         CGContextSaveGState(context);
 
-        NSDictionary *timeAttr = @{NSFontAttributeName : [UIFont systemFontOfSize:12]};
-        CGSize timeSize = [[NSString stringWithFormat:@"%@:%@",self.unitStr.length?self.unitStr:@"萬/坪",self.xTitleArray[nowPoint]] sizeWithAttributes:timeAttr];
-        
+        NSDictionary *unitAttr = @{NSFontAttributeName : [UIFont systemFontOfSize:12]};
+        CGSize unitSize = [[NSString stringWithFormat:@"%@:%@",self.unitStr.length?self.unitStr:@"萬/坪",self.xTitleArray[nowPoint]] sizeWithAttributes:unitAttr];
         
         //画文字所在的位置  动态变化
-        CGPoint drawPoint = CGPointZero;
-        if(_screenLoc.x >((ZQScreenWidth-ZQLeftMargin)/2) && _screenLoc.y < 80) {
-            //如果按住的位置在屏幕靠右边边并且在屏幕靠上面的地方   那么字就显示在按住位置的左上角40 60位置
-            drawPoint = CGPointMake(_currentLoc.x-40-timeSize.width, 80-60);
-        }
-        else if(_screenLoc.x >((ZQScreenWidth-ZQLeftMargin)/2) && _screenLoc.y > self.frame.size.height-20) {
-            drawPoint = CGPointMake(_currentLoc.x-40-timeSize.width, self.frame.size.height-20 -60);
-        }
-        else if(_screenLoc.x >((ZQScreenWidth-ZQLeftMargin)/2)) {
-            //如果按住的位置在屏幕靠右边边   那么字就显示在按住位置的左上角40 60位置
-            drawPoint = CGPointMake(_currentLoc.x-40-timeSize.width, _currentLoc.y-60);
-        }
-        else if (_screenLoc.x <= ((ZQScreenWidth-ZQLeftMargin)/2) && _screenLoc.y < 80) {
-            //如果按住的位置在屏幕靠左边边并且在屏幕靠上面的地方   那么字就显示在按住位置的右上角上角40 40位置
-            drawPoint = CGPointMake(_currentLoc.x+40, 80-60);
-            
-        }
-        else if (_screenLoc.x <= ((ZQScreenWidth-ZQLeftMargin)/2) && _screenLoc.y > self.frame.size.height-20) {
-            
-            drawPoint = CGPointMake(_currentLoc.x+40, self.frame.size.height-20 -60);
-            
-        }
-        else if(_screenLoc.x  <= ((ZQScreenWidth-ZQLeftMargin)/2)) {
-            //如果按住的位置在屏幕靠左边   那么字就显示在按住位置的右上角40 60位置
-            drawPoint = CGPointMake(_currentLoc.x+40, _currentLoc.y-60);
-        }
-        
+        CGPoint drawPoint = [self drawPointWithSize:unitSize selectPoint:selectPoint isDynamic:self.isShowDynamic];
+
         //画选中的红线
         [self drawLine:context startPoint:CGPointMake(selectPoint.x, 0) endPoint:CGPointMake(selectPoint.x, self.frame.size.height- textSize.height - 5) lineColor:ZQChartLineGedColor lineWidth:1 isArc:NO];
         
@@ -449,6 +423,46 @@
     return att;
 }
 
+#define GAP  10
+- (CGPoint)drawPointWithSize:(CGSize)unitSize selectPoint:(CGPoint)selectPoint isDynamic:(BOOL)isDynamic{
+    //画文字所在的位置  动态变化
+    CGPoint drawPoint = CGPointZero;
+    CGFloat staticPointX = selectPoint.x;
+    if(_screenLoc.x >((ZQScreenWidth-ZQLeftMargin)/2) && _screenLoc.y < 80) {
+        //如果按住的位置在屏幕靠右边边并且在屏幕靠上面的地方   那么字就显示在按住位置的左上角40 60位置
+        drawPoint = CGPointMake(_currentLoc.x-40-unitSize.width, 80-60);
+        staticPointX = staticPointX - ZQWordRectWith - GAP;
+    }
+    else if(_screenLoc.x >((ZQScreenWidth-ZQLeftMargin)/2) && _screenLoc.y > self.frame.size.height-20) {
+        drawPoint = CGPointMake(_currentLoc.x-40-unitSize.width, self.frame.size.height-20 -60);
+        staticPointX = staticPointX - ZQWordRectWith - GAP;
+    }
+    else if(_screenLoc.x >((ZQScreenWidth-ZQLeftMargin)/2)) {
+        //如果按住的位置在屏幕靠右边边并且在屏幕靠下面的地方   那么字就显示在按住位置的左上角40 60位置
+        drawPoint = CGPointMake(_currentLoc.x-40-unitSize.width, _currentLoc.y-60);
+        staticPointX = staticPointX - ZQWordRectWith - GAP;
+    }
+    else if (_screenLoc.x <= ((ZQScreenWidth-ZQLeftMargin)/2) && _screenLoc.y < 80) {
+        //如果按住的位置在屏幕靠左边边并且在屏幕靠上面的地方   那么字就显示在按住位置的右上角上角40 40位置
+        drawPoint = CGPointMake(_currentLoc.x+40, 80-60);
+        staticPointX = staticPointX + GAP;
+    }
+    else if (_screenLoc.x <= ((ZQScreenWidth-ZQLeftMargin)/2) && _screenLoc.y > self.frame.size.height-20) {
+        drawPoint = CGPointMake(_currentLoc.x+40, self.frame.size.height-20 -60);
+        staticPointX = staticPointX + GAP;
+    }
+    else if(_screenLoc.x  <= ((ZQScreenWidth-ZQLeftMargin)/2)) {
+        //如果按住的位置在屏幕靠左边并且在屏幕靠下面的地方    那么字就显示在按住位置的右上角40 60位置
+        drawPoint = CGPointMake(_currentLoc.x+40, _currentLoc.y-60);
+        staticPointX = staticPointX + GAP;
+    }
+    if (!isDynamic) {
+        drawPoint.x = staticPointX;
+        drawPoint.y = (self.frame.size.height - 60)/2;
+    }
+    
+    return drawPoint;
+}
 
 #pragma mark - function
 

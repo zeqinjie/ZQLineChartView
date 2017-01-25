@@ -44,6 +44,7 @@
     ZQLine.titleArr = @[@"本产品",@"罗湖区",@"深圳市"];
     ZQLine.isOpenPressGes = YES;
     //    ZQLine.isShowHorLine = YES;
+//    ZQLine.isShowDynamic = YES;
     ZQLine.isShowVerLine = YES;
     [self.view addSubview:ZQLine];
 }

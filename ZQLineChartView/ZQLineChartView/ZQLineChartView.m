@@ -97,6 +97,10 @@
     self.yAxisView.unitStr = unitStr;
 }
 
+- (void)setIsShowDynamic:(BOOL)isShowDynamic{
+    _isShowDynamic = isShowDynamic;
+    self.xAxisView.isShowDynamic = isShowDynamic;
+}
 
 #pragma mark - initUI
 

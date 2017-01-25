@@ -26,4 +26,5 @@
 #define ZQLeftMargin 45  //留出右边Y坐标轴 的文字区域视图宽度
 #define ZQScreenWidth [UIScreen mainScreen].bounds.size.width
 #define ZQ(weakSelf) __weak __typeof(&*self)weakSelf = self;
+#define ZQWordRectWith  70
 #endif /* ZQLineChartHeader_h */

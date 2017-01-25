@@ -22,6 +22,7 @@
 @property (assign,nonatomic) BOOL isShowVerLine;//是否显示垂直线
 @property (assign,nonatomic) BOOL isShowHorLine;//是否显示水平线
 @property (copy, nonatomic) NSString *unitStr;//单位字段  默认是 萬/坪
+@property (assign, nonatomic) BOOL isShowDynamic;//是否显示 是动态
 - (id)initWithFrame:(CGRect)frame
         xTitleArray:(NSArray*)xTitleArray
        yValueArrays:(NSArray*)yValueArrays
