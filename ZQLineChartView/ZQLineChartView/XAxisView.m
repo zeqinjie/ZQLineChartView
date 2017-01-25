@@ -359,12 +359,20 @@
     CGContextSetStrokeColorWithColor(context, lineColor.CGColor);
     CGContextMoveToPoint(context, startPoint.x, startPoint.y);
     if (isArc) {
-        CGContextAddLineToPoint(context, endPoint.x, endPoint.y);
+        //        CGPoint cp1 = CGPointMake(endPoint.x + (startPoint.x - endPoint.x) / 2.0, startPoint.y );
+        //        CGPoint cp2 = CGPointMake(endPoint.x + (startPoint.x - endPoint.x) / 2.0, endPoint.y);
+        //        CGContextAddCurveToPoint(context, cp1.x, cp1.y, cp2.x, cp2.y, endPoint.x, endPoint.y);
+        CGPoint midPoint = [self midPointForPoints:startPoint point2:endPoint];
+        CGPoint contrPoint1 = [self controlPointForPoints:midPoint point2:startPoint];
+        CGPoint contrPoint2 = [self controlPointForPoints:midPoint point2:endPoint];
+        CGContextAddQuadCurveToPoint(context,contrPoint1.x,contrPoint1.y,midPoint.x,midPoint.y);
+        CGContextAddQuadCurveToPoint(context,contrPoint2.x,contrPoint2.y,endPoint.x,endPoint.y);
     }else{
         CGContextAddLineToPoint(context, endPoint.x, endPoint.y);
     }
     CGContextStrokePath(context);
     CGColorSpaceRelease(Linecolorspace1);
+
 }
 
 //画矩形
@@ -504,4 +512,19 @@
     return result != 0;
 }
 
+- (CGPoint)midPointForPoints:(CGPoint) p1 point2:(CGPoint) p2 {
+    return CGPointMake((p1.x + p2.x) / 2, (p1.y + p2.y) / 2);
+}
+
+- (CGPoint)controlPointForPoints:(CGPoint) p1 point2:(CGPoint) p2 {
+    CGPoint controlPoint = [self midPointForPoints:p1 point2:p2];
+    CGFloat diffY = fabs(p2.y - controlPoint.y);
+    
+    if (p1.y < p2.y)
+        controlPoint.y += diffY;
+    else if (p1.y > p2.y)
+        controlPoint.y -= diffY;
+    
+    return controlPoint;
+}
 @end
