@@ -20,6 +20,7 @@
 		15898DBB1E374CF4009D1A12 /* ZQLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15898DB61E374CF4009D1A12 /* ZQLineChartView.m */; };
 		15898DBC1E374CF4009D1A12 /* XAxisView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15898DB81E374CF4009D1A12 /* XAxisView.m */; };
 		15898DBD1E374CF4009D1A12 /* YAxisView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15898DBA1E374CF4009D1A12 /* YAxisView.m */; };
+		15AB1FF11E4822B600888112 /* UIBezierPath+Smoothing.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AB1FF01E4822B600888112 /* UIBezierPath+Smoothing.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,8 @@
 		15898DB81E374CF4009D1A12 /* XAxisView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAxisView.m; sourceTree = "<group>"; };
 		15898DB91E374CF4009D1A12 /* YAxisView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YAxisView.h; sourceTree = "<group>"; };
 		15898DBA1E374CF4009D1A12 /* YAxisView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YAxisView.m; sourceTree = "<group>"; };
+		15AB1FEF1E4822B600888112 /* UIBezierPath+Smoothing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+Smoothing.h"; sourceTree = "<group>"; };
+		15AB1FF01E4822B600888112 /* UIBezierPath+Smoothing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+Smoothing.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +130,8 @@
 				15898DA31E374CB0009D1A12 /* TWColor.h */,
 				15898DA41E374CB0009D1A12 /* NSMutableAttributedString+StringContentColor.h */,
 				15898DA51E374CB0009D1A12 /* NSMutableAttributedString+StringContentColor.m */,
+				15AB1FEF1E4822B600888112 /* UIBezierPath+Smoothing.h */,
+				15AB1FF01E4822B600888112 /* UIBezierPath+Smoothing.m */,
 				15898DB31E374CF4009D1A12 /* ZQLineChartView */,
 				15898D771E374C91009D1A12 /* Main.storyboard */,
 				15898D7A1E374C91009D1A12 /* Assets.xcassets */,
@@ -313,6 +318,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15AB1FF11E4822B600888112 /* UIBezierPath+Smoothing.m in Sources */,
 				15898D761E374C91009D1A12 /* ViewController.m in Sources */,
 				15898D731E374C91009D1A12 /* AppDelegate.m in Sources */,
 				15898DBC1E374CF4009D1A12 /* XAxisView.m in Sources */,
@@ -558,6 +564,7 @@
 				15898D9A1E374C91009D1A12 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		15898D9B1E374C91009D1A12 /* Build configuration list for PBXNativeTarget "ZQLineChartViewTests" */ = {
 			isa = XCConfigurationList;
@@ -566,6 +573,7 @@
 				15898D9D1E374C91009D1A12 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		15898D9E1E374C91009D1A12 /* Build configuration list for PBXNativeTarget "ZQLineChartViewUITests" */ = {
 			isa = XCConfigurationList;
@@ -574,6 +582,7 @@
 				15898DA01E374C91009D1A12 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -9,6 +9,7 @@
 #import "XAxisView.h"
 #import "ZQLineChartHeader.h"
 #import "NSMutableAttributedString+StringContentColor.h"
+#import "UIBezierPath+Smoothing.h"
 @interface XAxisView ()
 
 @property (strong, nonatomic) NSArray *xTitleArray;
@@ -373,6 +374,58 @@
     CGContextStrokePath(context);
     CGColorSpaceRelease(Linecolorspace1);
 
+}
+
+- (void)drawLinesContext:(CGContextRef)context textSize:(CGSize)textSize yValueArray:(NSArray *)yValueArray lineColor:(UIColor *)lineColor{
+    //    self.layer.shouldRasterize = YES;
+    //    self.layer.allowsEdgeAntialiasing = YES;
+    //    CGContextSetShouldAntialias(context, YES ); //抗锯齿
+    if (yValueArray.count) {
+        UIColor *drawDotColor = lineColor,*drawLineColor = lineColor;
+        CGFloat chartHeight = self.frame.size.height - textSize.height - ZQAxisTextGap - topMargin;
+        UIBezierPath *path = [[UIBezierPath alloc] init];
+        [path setLineWidth: 1];
+        [path setLineCapStyle:kCGLineCapRound];
+        NSString *startValue = yValueArray[0];
+        if (!startValue.length) {
+            drawDotColor = [UIColor clearColor];
+        }else{
+            drawLineColor = lineColor;
+        }
+        //        [drawLineColor setStroke];
+        CGContextSetStrokeColorWithColor(context, drawLineColor.CGColor);
+        CGContextSetFillColorWithColor(context,drawLineColor.CGColor);
+        CGPoint startPoint = CGPointMake(self.pointGap, chartHeight -  (startValue.floatValue-self.yMin)/(self.yMax-self.yMin) * chartHeight+topMargin);
+        [path moveToPoint: startPoint];
+        CGContextSetFillColorWithColor(context, drawDotColor.CGColor);//填充颜色
+        CGContextAddArc(context, startPoint.x, startPoint.y, 3, 0, 2*M_PI, 0); //添加一个圆
+        CGContextDrawPath(context, kCGPathFill);//绘制填充
+        
+        if (yValueArray.count > 1) {
+            for(int i = 1; i < yValueArray.count; i++){
+                
+                NSString *value = yValueArray[i];
+                if (!value.length) {
+                    drawDotColor = [UIColor clearColor];
+                    drawLineColor = [UIColor clearColor];
+                }else{
+                    drawDotColor = lineColor;
+                    drawLineColor = lineColor;
+                }
+                //                [drawLineColor setStroke];
+                CGContextSetStrokeColorWithColor(context, drawLineColor.CGColor);
+                CGContextSetFillColorWithColor(context,drawLineColor.CGColor);
+                CGPoint point = CGPointMake((i+1)*self.pointGap, chartHeight -  (value.floatValue-self.yMin)/(self.yMax-self.yMin) * chartHeight+topMargin);
+                if (value.length) [path addLineToPoint: point];
+                CGContextSetFillColorWithColor(context, drawDotColor.CGColor);//填充颜色
+                CGContextAddArc(context, point.x, point.y, 3, 0, 2*M_PI, 0); //添加一个圆
+                CGContextDrawPath(context, kCGPathFill);//绘制填充
+            }
+        }
+        
+        UIBezierPath *smoothPath = [path smoothedPathWithGranularity: 40 minY:self.yMin maxY:self.yMax];
+        [smoothPath stroke];
+    }
 }
 
 //画矩形
